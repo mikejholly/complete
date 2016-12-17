@@ -1,6 +1,3 @@
-// TODO: capture weighting of word usage
-var trie = trieCreate({}, dict);
-
 function trieCreate(trie, dict) {
     dict.forEach(function(word, i) {
         if (word.length > 2) {
@@ -60,3 +57,23 @@ function key(event) {
         el.value = el.value.substring(0, el.value.length - word.length) + sugs[0] + ' ';
     }
 }
+
+function attachListeners() {
+    var els = document.getElementsByTagName('input');
+    Array.from(els).forEach(function(el) {
+        el.addEventListener("keyup", key);
+    });
+}
+
+function main() {
+    var doc = document.documentElement;
+    new MutationObserver(attachListeners).observe(doc, {
+        childList: true,
+        subtree: true
+    });
+};
+
+// TODO: capture weighting of word usage
+var trie = trieCreate({}, dict);
+
+main();

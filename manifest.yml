@@ -1,6 +1,11 @@
+manifest_version: 2
 name: complete
-version: 2
-background:
-  scripts:
-    - words.js
-    - main.js
+description: auto-complete for the desktop web
+version: 0.0.2
+content_scripts:
+  - matches:
+      - http://*/*
+      - https://*/*
+    js:
+      - words.js
+      - main.js
