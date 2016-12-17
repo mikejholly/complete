@@ -6,6 +6,8 @@ content_scripts:
   - matches:
       - http://*/*
       - https://*/*
+    css:
+      - main.css
     js:
       - words.js
       - main.js

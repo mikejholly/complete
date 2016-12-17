@@ -1,3 +1,5 @@
+var displayId = 'c0mp13t3';
+
 function trieCreate(trie, dict) {
     dict.forEach(function(word, i) {
         if (word.length > 2) {
@@ -50,12 +52,23 @@ function key(event) {
         return w[0];
     });
 
-    console.log(event.keyCode);
-    console.log(sugs);
+    setDisplay(el, sugs);
 
     if (event.keyCode == 27) {
         el.value = el.value.substring(0, el.value.length - word.length) + sugs[0] + ' ';
     }
+}
+
+function setDisplay(el, sugs) {
+    var d = el.parentNode.querySelector('#' + displayId);
+
+    if (!d) {
+        d = document.createElement("span");
+        d.id = displayId;
+        el.parentNode.appendChild(d);
+    }
+
+    d.innerText = sugs.slice(0, 4).join(' ');
 }
 
 function attachListeners() {
@@ -66,14 +79,12 @@ function attachListeners() {
 }
 
 function main() {
-    var doc = document.documentElement;
-    new MutationObserver(attachListeners).observe(doc, {
+    new MutationObserver(attachListeners).observe(document.documentElement, {
         childList: true,
         subtree: true
     });
 };
 
-// TODO: capture weighting of word usage
 var trie = trieCreate({}, dict);
 
 main();
