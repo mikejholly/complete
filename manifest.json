@@ -1,0 +1,10 @@
+{
+  "name": "complete",
+  "version": 2,
+  "background": {
+    "scripts": [
+      "words.js",
+      "main.js"
+    ]
+  }
+}
