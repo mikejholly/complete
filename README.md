@@ -10,21 +10,20 @@ first option you see!
 
 # TODO
 
-[x] Basic ESC-triggered completion
-[x] Display matches near text box
-[ ] Enhanced display that isn't obtrusive (and looks better)
-[ ] Support for textareas
-[ ] Support for Gmail and other rich editors
-[ ] Extract text on page
-[ ] Extract text as you type
-[ ] Cache in chrome.storage and add learned words there
-[ ] Find a better corpus with modern English
-[ ] Other languages
-[ ] Optional Tab completion?
+* [x] Basic ESC-triggered completion
+* [x] Display matches near text box
+* [ ] Enhanced display that isn't obtrusive (and looks better)
+* [ ] Support for textareas
+* [ ] Support for Gmail and other rich editors
+* [ ] Extract text on page
+* [ ] Extract text as you type
+* [ ] Cache in chrome.storage and add learned words there
+* [ ] Find a better corpus with modern English
+* [ ] Other languages
+* [ ] Optional Tab completion?
 
 # License
 
-```
 Copyright 2016 Mike Holly
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -32,4 +31,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
