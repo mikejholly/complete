@@ -1,5 +1,11 @@
+words.js:
+	head -100000 out.txt | awk '{print $2}' | ruby jsarray.rb -n dict > words.js
+
 manifest.json:
-	ruby -e "require 'yaml'; require 'json'; y = YAML.load_file('manifest.yml'); puts JSON.pretty_generate(y)" > manifest.json
+	ruby yaml2json.rb manifest.yml > manifest.json
+
+out.txt:
+	go run freq.go en.txt > out.txt
 
 clean:
-	rm manifest.json
+	rm manifest.json out.txt words.js
