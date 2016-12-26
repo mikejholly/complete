@@ -1,7 +1,9 @@
-#c0mp13t3 {
+#complete-display {
   position: absolute;
-  bottom: -5px;
   font-size: 12px;
-  right: 2px;
-  color: #aaa;
+  color: #3a7fb4;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 2px 7px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
