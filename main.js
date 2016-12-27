@@ -1,6 +1,5 @@
 'use strict';
 
-var displayId = 'complete-display';
 
 function trieCreate(trie, dict) {
     dict.forEach(function(word, i) {
@@ -51,6 +50,11 @@ function key(event) {
     var word = getInputCurrentWord(el);
     var sugs = getSuggestions(word.toLowerCase());
 
+    if (word.length < 2) {
+        killDisplay();
+        return;
+    }
+
     sugs = sugs.sort(function(a, b) {
         return a[1] - b[1];
     }).map(function(w) {
@@ -61,6 +65,7 @@ function key(event) {
 
     if (event.keyCode == 17) {
         el.value = el.value.substring(0, el.value.length - word.length) + sugs[0] + ' ';
+        killDisplay();
     }
 
     return false;
@@ -68,7 +73,7 @@ function key(event) {
 
 function setDisplay(el, word, sugs) {
     var body = document.querySelector('body');
-    var d = body.querySelector('#' + displayId);
+    var d = document.getElementById(displayId);
     var pos = el.getBoundingClientRect();
 
     if (!d) {
@@ -77,10 +82,20 @@ function setDisplay(el, word, sugs) {
         body.appendChild(d);
     }
 
-    // TODO: calculate exact offsets
-    d.style.top = (pos.top - 30) + 'px';
-    d.style.left = (pos.left - 10) + 'px';
-    d.innerText = sugs.slice(0, 4).join(' ');
+    d.style.top = (pos.top + window.pageYOffset - 30) + 'px';
+    d.style.left = (pos.left - 2) + 'px';
+
+    var html = '';
+    sugs.slice(0, 4).forEach(function(s) {
+        html += '<span class="word">' + s + '</span>';
+    });
+
+    d.innerHTML = html;
+}
+
+function killDisplay() {
+    var d = document.getElementById(displayId);
+    if (d) d.remove();
 }
 
 function attachListeners() {
@@ -97,7 +112,7 @@ function main() {
     });
 };
 
-
+var displayId = 'complete-display';
 var TRIE = trieCreate({}, dict);
 
 main();

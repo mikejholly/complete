@@ -12,8 +12,9 @@ first option you see!
 
 * [x] Basic ESC-triggered completion
 * [x] Display matches near text box
-* [ ] Enhanced display that isn't obtrusive (and looks better)
+* [x] Enhanced display that isn't obtrusive (and looks better)
 * [ ] Support for textareas
+* [ ] Support contractions (e.g., it's, they're, couldn't, etc.)
 * [ ] Support for Gmail and other rich editors
 * [ ] Extract text on page
 * [ ] Extract text as you type
