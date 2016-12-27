@@ -8,20 +8,21 @@ It works just like auto-complete on your phone. As you type into an input field,
 you'll see completions pop-up near the text field. Hit escape to complete the
 first option you see!
 
-# TODO
+# Features
 
 * [x] Basic ESC-triggered completion
 * [x] Display matches near text box
 * [x] Enhanced display that isn't obtrusive (and looks better)
-* [ ] Support for textareas
+* [x] Support for textareas
+* [x] Add text as you type
+* [ ] Click option to complete it
 * [ ] Support contractions (e.g., it's, they're, couldn't, etc.)
 * [ ] Support for Gmail and other rich editors
 * [ ] Extract text on page
-* [ ] Extract text as you type
 * [ ] Cache in chrome.storage and add learned words there
 * [ ] Find a better corpus with modern English
 * [ ] Other languages
-* [ ] Optional Tab completion?
+* [ ] Optional tab completion?
 
 # License
 
