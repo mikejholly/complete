@@ -69,11 +69,15 @@ function key(event) {
     setDisplay(el, word, sugs);
 
     if (event.keyCode == KEY_TRIGGER) {
-        el.value = el.value.substring(0, el.value.length - word.length) + sugs[0] + ' ';
+        completeWord(el, word, sugs);
         killDisplay();
     }
 
     return false;
+}
+
+function completeWord(el, word, sugs) {
+    el.value = el.value.substring(0, el.value.length - word.length) + sugs[0] + ' ';
 }
 
 function setDisplay(el, word, sugs) {
@@ -96,6 +100,14 @@ function setDisplay(el, word, sugs) {
     });
 
     d.innerHTML = html;
+
+    d.querySelectorAll('.word').forEach(function(n) {
+        n.addEventListener('click', function(e) {
+            completeWord(el, word, [n.innerText]);
+            killDisplay();
+            el.focus();
+        });
+    });
 }
 
 function killDisplay() {

@@ -16,7 +16,9 @@ first option you see!
 * [x] Support for textareas
 * [x] Add text as you type
 * [x] Support contractions (e.g., it's, they're, couldn't, etc.)
-* [ ] Click option to complete it
+* [x] Click option to complete it
+* [ ] Maintain caps if you've entered caps
+* [ ] ngram completion
 * [ ] Support for Gmail and other rich editors
 * [ ] Extract text on page
 * [ ] Cache in chrome.storage and add learned words there
