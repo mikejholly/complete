@@ -1,6 +1,5 @@
 'use strict';
 
-
 function trieCreate(trie, dict) {
     dict.forEach(function(word, i) {
         if (word.length > 2) {
@@ -84,24 +83,40 @@ function completeWord(el, word, sugs) {
 function setDisplay(el, word, sugs) {
     var body = document.querySelector('body');
     var d = document.getElementById(DISPLAY_ID);
-    var pos = el.getBoundingClientRect();
 
     if (!d) {
-        d = document.createElement('span');
-        d.id = DISPLAY_ID;
+        d = createDisplay();
         body.appendChild(d);
     }
 
-    d.style.top = (pos.top + window.pageYOffset - 25) + 'px';
-    d.style.left = (pos.left - 2) + 'px';
+    positionDisplay(el, d);
+    setDisplayHTML(d, sugs);
+    attachClickListeners(el, word, d);
+}
 
+function setDisplayHTML(d, sugs) {
     var html = '';
+
     sugs.slice(0, 4).forEach(function(s) {
         html += '<span class="word">' + s + '</span>';
     });
 
     d.innerHTML = html;
+}
 
+function createDisplay() {
+    var d = document.createElement('span');
+    d.id = DISPLAY_ID;
+    return d;
+}
+
+function positionDisplay(el, d) {
+    var pos = el.getBoundingClientRect();
+    d.style.top = (pos.top + window.pageYOffset - 25) + 'px';
+    d.style.left = (pos.left - 2) + 'px';
+}
+
+function attachClickListeners(el, word, d) {
     d.querySelectorAll('.word').forEach(function(n) {
         n.addEventListener('click', function(e) {
             completeWord(el, word, [n.innerText]);

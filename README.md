@@ -25,6 +25,7 @@ first option you see!
 * [ ] Find a better corpus with modern English
 * [ ] Other languages
 * [ ] Optional tab completion?
+* [ ] Some way to select secondary suggestions
 
 # License
 
