@@ -28,9 +28,20 @@ func main() {
 
 	fileName := args[1]
 
-	f, err := os.Open(fileName)
+	wordCounts, err := countWords(fileName)
 	if err != nil {
 		panic(err)
+	}
+
+	for _, item := range sortFreq(wordCounts) {
+		fmt.Printf("%d\t%s\n", item.Count, item.Text)
+	}
+}
+
+func countWords(fileName string) (map[string]int, error) {
+	f, err := os.Open(fileName)
+	if err != nil {
+		return nil, err
 	}
 
 	s := bufio.NewScanner(f)
@@ -38,7 +49,7 @@ func main() {
 
 	m := make(map[string]int)
 
-	r, _ := regexp.Compile("[^\\w]+")
+	r, _ := regexp.Compile("[^\\w']+")
 
 	for s.Scan() {
 		ws := r.Split(s.Text(), -1)
@@ -50,9 +61,13 @@ func main() {
 		}
 	}
 
+	return m, nil
+}
+
+func sortFreq(wordCounts map[string]int) freqItemSlice {
 	items := make(freqItemSlice, 10)
 
-	for k, v := range m {
+	for k, v := range wordCounts {
 		item := freqItem{
 			Text:  k,
 			Count: v,
@@ -62,7 +77,5 @@ func main() {
 
 	sort.Sort(items)
 
-	for _, item := range items {
-		fmt.Printf("%d\t%s\n", item.Count, item.Text)
-	}
+	return items
 }

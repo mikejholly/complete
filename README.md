@@ -15,8 +15,8 @@ first option you see!
 * [x] Enhanced display that isn't obtrusive (and looks better)
 * [x] Support for textareas
 * [x] Add text as you type
-* [ ] Click option to complete it
 * [ ] Support contractions (e.g., it's, they're, couldn't, etc.)
+* [ ] Click option to complete it
 * [ ] Support for Gmail and other rich editors
 * [ ] Extract text on page
 * [ ] Cache in chrome.storage and add learned words there
