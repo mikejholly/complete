@@ -12,11 +12,12 @@ function trieCreate(trie, dict) {
 
 function trieInsert(trie, word, score) {
     if (word.match(/\d+/)) return;
+
     word.toLowerCase().split('').forEach(function(l) {
         if (!trie[l]) trie[l] = {};
         trie = trie[l];
     });
-    if (trie['tn']) return;
+
     trie['tn'] = [word, score];
 }
 
@@ -121,9 +122,15 @@ function attachListeners() {
         el.addEventListener('keyup', key);
     });
 
-    var els = document.getElementsByTagName('textarea');
+    els = document.getElementsByTagName('textarea');
     Array.from(els).forEach(function(el) {
         el.addEventListener('keyup', key);
+    });
+}
+
+function ingestPage() {
+    document.body.innerText.split(/[^\w']+/).forEach(function(w) {
+        trieInsert(TRIE, w, NEW_WORD_SCORE);
     });
 }
 
@@ -132,11 +139,15 @@ function main() {
         childList: true,
         subtree: true
     });
+
+    TRIE = trieCreate({}, dict);
+
+    ingestPage();
 }
 
-var NEW_WORD_SCORE = 1000;
+var NEW_WORD_SCORE = 0;
 var DISPLAY_ID = 'complete-display';
-var TRIE = trieCreate({}, dict);
+var TRIE = {};
 var KEY_SPACE = 32;
 var KEY_TRIGGER = 17; // Control (for now)
 

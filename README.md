@@ -17,10 +17,10 @@ first option you see!
 * [x] Add text as you type
 * [x] Support contractions (e.g., it's, they're, couldn't, etc.)
 * [x] Click option to complete it
+* [x] Extract text on page
 * [ ] Maintain caps if you've entered caps
-* [ ] ngram completion
+* [ ] ngram completion (phrases and noun-strings)
 * [ ] Support for Gmail and other rich editors
-* [ ] Extract text on page
 * [ ] Cache in chrome.storage and add learned words there
 * [ ] Find a better corpus with modern English
 * [ ] Other languages
