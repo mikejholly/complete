@@ -1,12 +1,11 @@
 'use strict';
 
-function trieCreate(trie, dict) {
-    dict.forEach(function(word, i) {
+function trieInsertMany(trie, words) {
+    words.forEach(function(word, i) {
         if (word.length > 2) {
             trieInsert(trie, word, i + 1);
         }
     });
-    return trie;
 }
 
 function trieInsert(trie, word, score) {
@@ -17,7 +16,11 @@ function trieInsert(trie, word, score) {
         trie = trie[l];
     });
 
-    trie['tn'] = [word, score];
+    if (!trie['last']) {
+        trie['last'] = [];
+    }
+
+    trie['last'].push([word, score]);
 }
 
 function trieFind(trie, find, prefix, results) {
@@ -26,13 +29,18 @@ function trieFind(trie, find, prefix, results) {
         trie = trie[l];
         prefix += l;
     });
-    if (trie['tn']) {
-        results.push(trie['tn']);
+
+    if (trie['last']) {
+        trie['last'].forEach(function(r) {
+            results.push(r);
+        });
     }
+
     Object.keys(trie).forEach(function(k) {
-        if (k == 'tn') return;
+        if (k == 'last') return;
         trieFind(trie, k, prefix, results);
     });
+
     return results;
 }
 
@@ -48,12 +56,13 @@ function getInputCurrentWord(el) {
 function key(event) {
     var el = event.target;
     var word = getInputCurrentWord(el);
-    var sugs = getSuggestions(word.toLowerCase());
 
     if (word.length < 2) {
         killDisplay();
         return true;
     }
+
+    var sugs = getSuggestions(word);
 
     if (event.keyCode == KEY_SPACE) {
         trieInsert(TRIE, word, NEW_WORD_SCORE);
@@ -144,9 +153,8 @@ function attachListeners() {
 }
 
 function ingestPage() {
-    document.body.innerText.split(/[^\w']+/).forEach(function(w) {
-        trieInsert(TRIE, w, NEW_WORD_SCORE);
-    });
+    var words = document.body.innerText.split(/[^\w']+/);
+    trieInsertMany(TRIE, words);
 }
 
 function main() {
@@ -155,8 +163,8 @@ function main() {
         subtree: true
     });
 
-    TRIE = trieCreate({}, dict);
-
+    trieInsertMany(TRIE, dict);
+    console.log(TRIE);
     ingestPage();
 }
 
