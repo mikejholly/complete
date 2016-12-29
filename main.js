@@ -20,7 +20,16 @@ function trieInsert(trie, word, score) {
         trie['last'] = [];
     }
 
-    trie['last'].push([word, score]);
+    var found = false;
+    trie['last'].forEach(function(r) {
+        if (r[0] == word) {
+            found = true;
+        }
+    });
+
+    if (!found) {
+        trie['last'].push([word, score]);
+    }
 }
 
 function trieFind(trie, find, prefix, results) {
