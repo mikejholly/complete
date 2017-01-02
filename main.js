@@ -62,20 +62,29 @@ function getInputCurrentWord(el) {
     return parts[parts.length - 1];
 }
 
-function key(event) {
+function keyDown(event) {
+    var el = event.target;
+
+    if (OPEN && event.keyCode == KEY_TRIGGER) {
+        COMPLETE = true;
+        event.preventDefault();
+    }
+}
+
+function keyUp(event) {
     var el = event.target;
     var word = getInputCurrentWord(el);
 
     if (word.length < 2) {
         killDisplay();
-        return true;
+        return;
     }
 
     var sugs = getSuggestions(word);
 
     if (event.keyCode == KEY_SPACE) {
         trieInsert(TRIE, word, NEW_WORD_SCORE);
-        return true;
+        return;
     }
 
     sugs = sugs.sort(function(a, b) {
@@ -86,12 +95,12 @@ function key(event) {
 
     setDisplay(el, word, sugs);
 
-    if (event.keyCode == KEY_TRIGGER) {
+    if (COMPLETE) {
+        COMPLETE = false;
         completeWord(el, word, sugs);
         killDisplay();
+        event.preventDefault();
     }
-
-    return false;
 }
 
 function completeWord(el, word, sugs) {
@@ -99,6 +108,8 @@ function completeWord(el, word, sugs) {
 }
 
 function setDisplay(el, word, sugs) {
+    OPEN = true;
+
     var body = document.querySelector('body');
     var d = document.getElementById(DISPLAY_ID);
 
@@ -145,19 +156,17 @@ function attachClickListeners(el, word, d) {
 }
 
 function killDisplay() {
+    OPEN = false;
     var d = document.getElementById(DISPLAY_ID);
     if (d) d.remove();
 }
 
 function attachListeners() {
-    var els = document.getElementsByTagName('input');
-    Array.from(els).forEach(function(el) {
-        el.addEventListener('keyup', key);
-    });
+    var els = document.querySelectorAll('input[type=text], textarea');
 
-    els = document.getElementsByTagName('textarea');
     Array.from(els).forEach(function(el) {
-        el.addEventListener('keyup', key);
+        el.addEventListener('keydown', keyDown);
+        el.addEventListener('keyup', keyUp);
     });
 }
 
@@ -181,6 +190,8 @@ var NEW_WORD_SCORE = 0;
 var DISPLAY_ID = 'complete-display';
 var TRIE = {};
 var KEY_SPACE = 32;
-var KEY_TRIGGER = 17; // Control (for now)
+var KEY_TRIGGER = 9;
+var COMPLETE = false;
+var OPEN = false;
 
 main();
