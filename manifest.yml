@@ -1,7 +1,8 @@
 manifest_version: 2
 name: Auto-complete
+short_name: Auto-complete
 description: Auto-complete for the desktop web.
-version: 0.1.1
+version: 0.1.2
 icons:
   540: icon.png
 content_scripts:
