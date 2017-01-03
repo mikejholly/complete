@@ -1,7 +1,9 @@
 manifest_version: 2
-name: complete
-description: auto-complete for the desktop web
-version: 0.0.2
+name: Auto-complete
+description: Auto-complete for the desktop web.
+version: 0.1.1
+icons:
+  540: icon.png
 content_scripts:
   - matches:
       - http://*/*

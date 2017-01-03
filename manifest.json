@@ -2,7 +2,10 @@
   "manifest_version": 2,
   "name": "complete",
   "description": "auto-complete for the desktop web",
-  "version": "0.0.2",
+  "version": "0.1.0",
+  "icons": {
+    "540": "icon.png"
+  },
   "content_scripts": [
     {
       "matches": [

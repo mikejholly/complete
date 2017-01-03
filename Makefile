@@ -9,3 +9,7 @@ tools/out.txt:
 
 clean:
 	rm manifest.json tools/out.txt words.js
+
+complete.zip:
+	cd .. && \
+	zip -r complete.zip complete/*.png complete/*.js complete/*.css complete/manifest.json
